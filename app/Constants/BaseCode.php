@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
-use IntBackedEnum;
-
 enum BaseCode: int implements CodeInterface
 {
     case Ok = 200000;

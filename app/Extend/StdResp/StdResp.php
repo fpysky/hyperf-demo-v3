@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Extend\StdResp;
 
-use App\Constants\BaseCode;
 use App\Constants\StatusCode;
 use Hyperf\Contract\Arrayable;
-use Hyperf\HttpServer\Contract\ResponseInterface;
-use Hyperf\HttpServer\Response;
 use Hyperf\Utils\Collection;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
@@ -16,7 +13,7 @@ trait StdResp
 {
     use StdOutput;
 
-    public function success($input, string $msg = '', int $code = BaseCode::Ok->value): PsrResponseInterface
+    public function success($input, string $msg = '', int $code = 200000): PsrResponseInterface
     {
         return match (true) {
             is_string($input) => $this->message($input),
@@ -30,22 +27,22 @@ trait StdResp
         };
     }
 
-    public function item($input, string $msg, int $code = BaseCode::Ok->value): PsrResponseInterface
+    public function item($input, string $msg, int $code = 200000): PsrResponseInterface
     {
         return $this->buildResp($msg, $code, $input);
     }
 
-    public function error(string $msg = '服务器错误', int $code = BaseCode::ServerError->value, mixed $data = null): PsrResponseInterface
+    public function error(string $msg = '服务器错误', int $code = 200000, mixed $data = null): PsrResponseInterface
     {
         return $this->buildResp($msg, $code, $data, StatusCode::ServerError);
     }
 
-    public function message(string $msg = '', int $code = BaseCode::Ok->value): PsrResponseInterface
+    public function message(string $msg = '', int $code = 200000): PsrResponseInterface
     {
         return $this->buildResp($msg, $code);
     }
 
-    public function collection(Collection $collection, string $msg, int $code = BaseCode::Ok->value): PsrResponseInterface
+    public function collection(Collection $collection, string $msg, int $code = 200000): PsrResponseInterface
     {
         return $this->buildResp($msg, $code, $collection);
     }
