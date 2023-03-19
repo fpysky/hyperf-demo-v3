@@ -20,6 +20,15 @@ class StdRespTest extends AbstractHttpTest
         $this->testMsgResp();
         $this->testArrayResp();
         $this->testMepResp();
+        $this->testBoolResp();
+    }
+
+    public function testBoolResp()
+    {
+        $resp = $this->doReq(true);
+
+        $this->assertIsBool($resp->getData());
+        $this->printResp(__FUNCTION__,$resp->getRawResp());
     }
 
     public function testMsgResp()

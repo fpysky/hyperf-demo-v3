@@ -23,11 +23,12 @@ trait StdResp
             is_array($input),
             $input instanceof \stdClass => $this->item($input, $msg, $code),
             $input === null => $this->message(),
+            is_bool($input) => $this->item($input),
             default => throw new \RuntimeException("can't handle input data."),
         };
     }
 
-    public function item($input, string $msg, int $code = 200000): PsrResponseInterface
+    public function item($input, string $msg = '', int $code = 200000): PsrResponseInterface
     {
         return $this->buildResp($msg, $code, $input);
     }

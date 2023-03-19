@@ -57,7 +57,6 @@ abstract class AbstractHttpTest extends HttpTestCase
         $this->assertArrayHasKey('data', $resp);
         $this->assertTrue(is_string($resp['msg']));
         $this->assertTrue(is_numeric($resp['code']));
-        $this->assertIsArray($resp['data']);
     }
 
     protected function assertPaginationStructure(array $respContent)
